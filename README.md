@@ -9,3 +9,6 @@
 
 맞춤법 검사기
 https://github.com/ssut/py-hanspell
+
+참고용 글
+https://ebbnflow.tistory.com/246
