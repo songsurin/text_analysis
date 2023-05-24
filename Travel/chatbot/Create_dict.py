@@ -9,19 +9,19 @@ import pandas as pd
 purpose = pd.read_csv("../data/수정데이터/용도별 목적대화 데이터.csv")
 topic = pd.read_csv("../data/수정데이터/주제별 텍스트 일상 대화 데이터.csv")
 sense = pd.read_csv("../data/수정데이터/일반상식 데이터.csv")
-info = pd.read_csv("../data/수정데이터/여행정보 데이터.csv")
+travelinfo = pd.read_csv("../data/수정데이터/여행정보 데이터.csv")
 recommend = pd.read_csv("../data/수정데이터/여행지추천 데이터.csv")
 
 purpose.dropna(inplace=True)
 topic.dropna(inplace=True)
 sense.dropna(inplace=True)
-info.dropna(inplace=True)
+travelinfo.dropna(inplace=True)
 recommend.dropna(inplace=True)
 
 text1 = list(purpose["text"])
 text2 = list(topic["text"])
 text3 = list(sense["question"]) + list(sense["answer"])
-text4 = list(info["city"]) + list(info["title"])
+text4 = list(travelinfo["city"]) + list(travelinfo['sigungu']) + list(travelinfo["title"])
 text5 = list(recommend["question"]) + list(recommend["answer"])
 
 corpus_data = text1 + text2 + text3 + text4 + text5
