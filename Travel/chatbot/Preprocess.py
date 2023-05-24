@@ -2,9 +2,18 @@
 
 from konlpy.tag import Komoran
 import jpype
+import pickle
 
 class Preprocess:
-    def __init__(self, userdic=None):
+    def __init__(self, word2index_dic='../data/chatbot_dict.bin', userdic=None):
+        # 단어 익덱스 사전 불러오기
+        if (word2index_dic != ''):
+            f = open(word2index_dic, 'rb')
+            self.word_index = pickle.load(f)
+            f.close()
+        else:
+            self.word_index = None
+            
         # 형태소 분석기 초기화
         self.komoran = Komoran(userdic=userdic)
         # 제외할 품사(참조: https://docs.komoran.kr/firststep/postypes.html)
