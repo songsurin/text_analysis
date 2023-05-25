@@ -4,8 +4,8 @@ from tensorflow.keras import preprocessing
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Input, Embedding, Dense, Dropout, Conv1D, GlobalMaxPool1D, concatenate
 from tensorflow.keras.optimizers import Adam
-from Preprocess import Preprocess
-from GlobalParams import MAX_SEQ_LEN
+from chatbot.Preprocess import Preprocess
+from chatbot.GlobalParams import MAX_SEQ_LEN
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -20,18 +20,23 @@ data = pd.read_csv("../data/수정데이터/total_train_data.csv")
 text = data['text'].tolist()
 label = data['label'].tolist()
 p = Preprocess(word2index_dic='../data/chatbot_dict.bin', 
-               userdic=None)
+               userdic='../data/user_dic.tsv')
 
 # 단어 시퀀스 생성
 sequences = []
+count = 0
 for sentence in text:
     pos = p.pos(sentence)
     keywords = p.get_keywords(pos, without_tag=True)
     seq = p.get_wordidx_sequence(keywords)
-    sequences.append(seq)
+    if len(seq) == 0:
+        del(label[count])
+    else:
+        sequences.append(seq)
+    count += 1
 
 # 단어 시퀀스 벡터 크기
-padded_seqs = preprocessing.sequence.pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post')
+padded_seqs = preprocessing.sequence.pad_sequences(sequences, maxlen=MAX_SEQ_LEN, padding='post', dtype='float')
 
 # 학습용, 검증용, 테스트용 데이터셋 생성
 ds = tf.data.Dataset.from_tensor_slices((padded_seqs, label))
@@ -73,9 +78,9 @@ concat = concatenate([pool1, pool2])
 
 hidden = Dense(128, activation=tf.nn.relu)(concat)
 dropout_hidden = Dropout(rate=dropout_prob)(hidden)
-logits = Dense(3, name='logits')(dropout_hidden)
-predictions = Dense(3, activation=tf.nn.softmax)(logits)
-adam = Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
+logits = Dense(4, name='logits')(dropout_hidden)
+predictions = Dense(4, activation=tf.nn.softmax)(logits)
+adam = Adam(learning_rate=0.0001)
 
 # 모델 생성
 model = Model(inputs=input_layer, outputs=predictions)
