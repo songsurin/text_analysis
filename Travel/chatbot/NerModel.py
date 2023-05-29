@@ -1,13 +1,14 @@
+# 개체명 인식 모델 모듈
+
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.models import Model, load_model
 from tensorflow.keras import preprocessing
 
-# 개체명 인식 모델 모듈
 class NerModel:
     def __init__(self, model_name, preprocess):
         # BIO 태그 클래스별 레이블
-        self.index_to_ner = {1: 'O', 2: 'B_C', 3: 'B_R', 4: 'B_DT', 5: 'B_T', 6: 'B_G', 7: 'B_A', 0: 'PAD'}
+        self.index_to_ner = {1: 'O', 2: 'B_DT', 3: 'B_C', 4: 'B_R', 5: 'B_G', 6: 'B_A', 7: 'B_P', 8: 'B_T', 9: 'X', 10: 'I', 0: 'PAD'}
 
         # 의도 분류 모델 불러오기
         self.model = load_model(model_name)
@@ -23,7 +24,7 @@ class NerModel:
         keywords = self.p.get_keywords(pos, without_tag=True)
         sequences = [self.p.get_wordidx_sequence(keywords)]
         # 패딩처리
-        max_len = 40
+        max_len = 30
         padded_seqs = preprocessing.sequence.pad_sequences(sequences,
                                                            padding='post',
                                                            value=0,
@@ -40,7 +41,7 @@ class NerModel:
         keywords = self.p.get_keywords(pos, without_tag=True)
         sequences = [self.p.get_wordidx_sequence(keywords)]
         # 패딩처리
-        max_len = 40
+        max_len = 30
         padded_seqs = preprocessing.sequence.pad_sequences(sequences,
                                                            padding='post',
                                                            value=0,
