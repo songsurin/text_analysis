@@ -4,7 +4,7 @@ USE travel;
 CREATE TABLE chatbot_train_data (
    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
    intent VARCHAR(45),
-   ner VARCHAR(45),travel 
+   ner VARCHAR(45),
 	QUERY TEXT,
    answer TEXT NOT NULL
 );
@@ -26,3 +26,5 @@ INSERT INTO `chatbot_train_data` (`id`, `intent`, `ner`, `query`, `answer`) VALU
 	(14, '기타', NULL, '여행지 추천 해주세요', '네, 혹시 가고 싶은 지역이나, 일정 계획 등을 알려주실 수 있을까요?'),
 	(15, '기타', NULL, NULL, '질문을 이해하지 못했어요'),
 	(16, '기타', 'X', '{X}', '욕설이 포함되어있어요 :(')
+	
+SELECT * FROM chatbot_train_data;
