@@ -15,7 +15,7 @@ db = Database(
     db_name=DB_NAME
 )
 db.connect() # 디비 연결
-queries = ['부모님과 놀러갈만한 데 어디 없을까요','안녕하세요','개새끼']
+queries = ['부모님과 놀러갈만한 데 어디 없을까요','안녕하세요','새끼']
 
 # 의도 파악 모델
 intent = IntentModel(model_name='../model/intent_model.h5',

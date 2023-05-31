@@ -4,9 +4,9 @@ class FindAnswer:
 
     # 검색 쿼리 생성
     def _make_query(self, intent_name, ner_tags):
-        sql = 'select * from chatbot_train_data'
+        sql = "select * from chatbot_train_data"
         if intent_name != None and ner_tags == None:
-            sql = sql + " where intent = '{}' ".format(intent_name)
+            sql = sql + " where intent='{}' ".format(intent_name)
         elif intent_name != None and ner_tags != None:
             where = ' where intent="%s" ' % intent_name
             if (len(ner_tags) > 0):
@@ -14,9 +14,9 @@ class FindAnswer:
                 for ne in ner_tags:
                     where += " ner like '%{}%' or ".format(ne)
                 where = where[:-3] + ')'
-            sql += where
-        # 동일한 답변이 2개 이상일 경우, 랜덤으로 선택
-        sql = sql + " order by rand() limit 1"
+            sql = sql + where
+        # 동일한 답변이 2개 이상인 경우, 랜덤으로 선택
+        sql = sql + " limit 1"
         return sql
 
     # 답변 검색
@@ -28,13 +28,13 @@ class FindAnswer:
         if answer is None:
             sql = self._make_query(intent_name, None)
             answer = self.db.select_one(sql)
-        return answer['answer']
+        return (answer['answer'])
 
     # NER 태그를 실제 입력된 단어로 변환
     def tag_to_word(self, ner_predicts, answer):
         for word, tag in ner_predicts:
-            # 변환해야 하는 태그가 있는 경우 추가
-            if tag == 'B_R' or tag == 'B_DT' or tag == 'B_C' or tag == 'B_A' or tag == 'B_T':
+            # 변환해야하는 태그가 있는 경우 추가
+            if tag == 'B_R' or tag == 'B_DT' or tag == 'B_T' or tag == 'B_C' or tag == 'B_P' or tag == 'B_A':
                 answer = answer.replace(tag, word)
         answer = answer.replace('{', '')
         answer = answer.replace('}', '')

@@ -11,7 +11,7 @@ f.close()
 sent = "테스트입니다. 단어사전 확인 중. 제대로 작동하면 성공. 예약 시스템을 만들 기초가 됩니다. 홍대에 놀러가려 하는데 놀거리 추천 좀~"
 
 # 전처리 객체 생성
-p = Preprocess()
+p = Preprocess(word2index_dic="../../data/chatbot_dict.bin", userdic="../../data/user_dic.tsv")
 
 # 형태소분석기 실행
 pos = p.pos(sent)

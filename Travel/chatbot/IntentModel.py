@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras.models import Model, load_model
 from tensorflow.keras import preprocessing
-from GlobalParams import MAX_SEQ_LEN
+from chatbot.GlobalParams import MAX_SEQ_LEN
 # 의도 분류 모델 모듈
 class IntentModel:
     def __init__(self, model_name, preprocess):

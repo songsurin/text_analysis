@@ -22,4 +22,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.recommend),
     path('query', views.query),
+    path('delete_chat', views.delete_chat),
+    path('result', views.recommend),
 ]

@@ -3,7 +3,7 @@ from chatbot.IntentModel import IntentModel
 p = Preprocess(word2index_dic='../../data/chatbot_dict.bin', userdic=None)
 intent = IntentModel(model_name='../model/intent_model.h5', preprocess=p)
 
-query = "춘천 여행지 추천 좀 해주세요"
+query = "렌트카 예약하고 싶어요 제주도 놀러가는데"
 predict = intent.predict_class(query)
 predict_label = intent.labels[predict]
 print(query)
