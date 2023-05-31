@@ -19,13 +19,18 @@ $(function(){
         });
     });
 });
-
+    function delete_chat(){
+      if(confirm('모든 내용을 삭제하시겠습니까?')){
+        location.href='delete_chat';
+      }
+    }
 </script>
 </head>
 <body>
 여행지 추천 챗봇 서비스입니다.
 <input type="text" id="question">
 <input type="button" id="button1" value="확인">
+<input type="button" onclick="delete_chat()" value="삭제">
 <div id="div1"></div>
 </body>
 <body>
