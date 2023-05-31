@@ -6,13 +6,13 @@ from chatbot.NerModel import NerModel
 from chatbot.FindAnswer import FindAnswer
 
 # 전처리 객체 생성
-p = Preprocess(word2index_dic='C:/Users/tjoeun/Desktop/surin/text_analysis/Travel/data/chatbot_dict.bin', userdic='C:/Users/tjoeun/Desktop/surin/text_analysis/Travel/data/user_dic.tsv')
+p = Preprocess(word2index_dic='../Travel/data/chatbot_dict.bin', userdic='../Travel/data/user_dic.tsv')
 
 # 의도 파악 모델
-intent = IntentModel(model_name='C:/Users/tjoeun/Desktop/surin/text_analysis/Travel/chatbot/model/intent_model.h5', preprocess=p)
+intent = IntentModel(model_name='../Travel/chatbot/model/intent_model.h5', preprocess=p)
 
 # 개체명 인식 모델
-ner = NerModel(model_name='C:/Users/tjoeun/Desktop/surin/text_analysis/Travel/chatbot/model/ner_model.h5', preprocess=p)
+ner = NerModel(model_name='../Travel/chatbot/model/ner_model.h5', preprocess=p)
 
 
 def getMessage(query):
