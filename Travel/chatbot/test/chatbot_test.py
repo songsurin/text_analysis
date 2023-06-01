@@ -15,7 +15,14 @@ db = Database(
     db_name=DB_NAME
 )
 db.connect() # 디비 연결
-queries = ['부모님과 놀러갈만한 데 어디 없을까요','안녕하세요','새끼']
+queries = ['부모님과 놀러갈만한 데 어디 없을까요',
+           '안녕하세요.',
+           '개똥벌레',
+           '새끼',
+           '속초에 관광지 추천해주세요.',
+           '제주도 맛집 추천 좀 해주세요.',
+           'ㅇㅇ',
+           '여행지']
 
 # 의도 파악 모델
 intent = IntentModel(model_name='../model/intent_model.h5',
@@ -31,18 +38,19 @@ for query in queries:
     intent_name = intent.labels[predict]
     predicts = ner.predict(query)
     ner_tags = ner.predict_tags(query)
-    print("질문 : ", query)
+    print("질문:", query)
     print("=" * 100)
-    print("의도 파악 : ", intent_name)
-    print("개체명 인식 : ", predicts)
-    print("답변 검색에 필요한 NER 태그 : ", ner_tags)
+    print("의도 파악:", intent_name)
+    print("개체명 인식:", predicts)
+    print("답변 검색에 필요한 NER 태그:", ner_tags)
     print("=" * 100)
     # 답변 검색
     try:
         f = FindAnswer(db)
         answer_text = f.search(intent_name, ner_tags)
         answer = f.tag_to_word(predicts, answer_text)
+        print("답변:", answer)
     except:
         answer = "죄송해요 무슨 말인지 모르겠어요"
-        print("답변: ", answer)
+        print("답변:", answer)
         db.close() # 디비 연결 끊음

@@ -4,8 +4,6 @@ from travel.models import Chat
 from django.http import JsonResponse
 import socket
 import json
-import hashlib
-import json
 import sys
 
 def get_answer(query):
@@ -24,6 +22,7 @@ def get_answer(query):
     # 챗봇 엔진 서버 연결 소켓 닫기
     mySocket.close()
     return ret_data
+
 def recommend(request):
     return render(request, 'travel/recommend.html')
 
@@ -49,6 +48,10 @@ def query(request):
     print(items)
 
     return render(request, 'travel/result.html',{'items':items})
+
 def delete_chat(request):
     Chat.objects.all().delete()
+    return redirect('/result')
+
+def research(request):
     return redirect('/result')
