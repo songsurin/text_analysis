@@ -33,21 +33,24 @@ def getMessage(query):
         ans = AnswerModel(ner_predicts)
         item = ans.refine(ner_predicts)
         Q = ans.create_query(item)
-        A = ans.search(Q, item=item)
+        A = ans.search(Q)
         # 답변 검색
         try:
             f = FindAnswer(db)
             answer_text = f.search(intent_name, ner_tags)
             answer = f.tag_to_word(ner_predicts, answer_text)
-            if intent_name != '기타' and ner_tags != None:
+            tf = '0'
+            if intent_name != '기타':
                 answer = answer + ' ' + A
+                tf = '1'
         except:
             answer = "죄송합니다. 질문 내용을 이해하지 못했습니다."
         json = {
             "Query": query,
             "Answer": answer,
             "Intent": intent_name,
-            "NER": str(ner_predicts)
+            "NER": str(ner_predicts),
+            "TF": tf
         }
         return json
     except Exception as ex:

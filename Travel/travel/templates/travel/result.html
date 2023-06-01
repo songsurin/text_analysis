@@ -44,7 +44,9 @@
             border-radius: 10px;
             font-size: 13px;
             background-color: white;" width="50%">{{item.answer}}
-    <input style="text-align: center;width: 60px;height: 35px; border-radius: 50px; background-color: transparent;" type="button" value="ADD">
+        {% if item.tf == '1' %}
+            <input style="text-align: center;width: 60px;height: 35px; border-radius: 50px; background-color: transparent;" type="button" value="ADD">
+        {% endif %}
     </td>
     {% else %}
     <td width="50%" bgcolor="cornflowerblue">{{item.answer}}</td>

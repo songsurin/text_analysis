@@ -5,3 +5,4 @@ class Chat(models.Model):
     query = models.CharField(max_length=500, null=False)
     answer = models.CharField(max_length=1000, null=False)
     intent = models.CharField(max_length=50, null=False)
+    tf = models.CharField(max_length=50, null=False)

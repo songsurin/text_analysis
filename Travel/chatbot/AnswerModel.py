@@ -137,7 +137,7 @@ class AnswerModel:
         return answer
 
     # 네이버 크롤링
-    def search(self, queries, item):
+    def search(self, queries):
         # 옵션 생성
         options = webdriver.ChromeOptions()
         # 창 숨기는 옵션 추가
@@ -156,9 +156,6 @@ class AnswerModel:
                 res_list = driver.find_elements(By.CLASS_NAME, 'place_bluelink')
                 top5 = res_list[0:5]
                 time.sleep(0.5)
-
-            if (len(top5) == 0) | (item[4][0] in ['신혼', '신혼여행']):
-                return self.research(queries, item)
 
             try:
                 if '맛집' in query:

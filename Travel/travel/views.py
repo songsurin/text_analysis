@@ -41,9 +41,10 @@ def query(request):
     query=msg['Query']
     answer=msg['Answer']
     intent=msg['Intent']
+    tf=msg['TF']
 
-    Chat(query=query,intent=intent).save()
-    Chat(answer=answer,intent=intent).save()
+    Chat(query=query,intent=intent,tf=tf).save()
+    Chat(answer=answer,intent=intent,tf=tf).save()
     items=Chat.objects.order_by('idx')
     print(items)
 

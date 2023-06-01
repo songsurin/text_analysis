@@ -19,12 +19,11 @@ $(function(){
         });
     });
 });
-    function delete_chat(){
-      if(confirm('모든 내용을 삭제하시겠습니까?')){
-        location.href='delete_chat';
+function delete_chat(){
+   if(confirm('모든 내용을 삭제하시겠습니까?')){
+     location.href='delete_chat';
       }
     }
-
 
 </script>
   <head>
@@ -53,14 +52,30 @@ $(function(){
         width: 500px;
         margin: auto;
         background-color: #A9D0F5;
-        overflow: scroll;
+        overflow-y: auto;
+        display:flex;
+        flex-direction: column-reverse;
       }
-
+      main::-webkit-scrollbar {
+          width: 10px;
+        }
+      main::-webkit-scrollbar-thumb {
+          background-color: #2f3542;
+          border-radius: 10px;
+          background-clip: padding-box;
+          border: 2px solid transparent;
+        }
+      main::-webkit-scrollbar-track {
+          background-color: grey;
+          border-radius: 10px;
+          box-shadow: inset 0px 0px 5px white;
+        }
       .back {
         background-color: white;
         height: 820px;
         width: 520px;
       }
+
     </style>
   </head>
   <body>
@@ -68,15 +83,14 @@ $(function(){
     <header>
       <h1>여행지 추천 챗봇 서비스입니다.</h1>
     </header>
-    <main>
+    <main calss="msg_panel">
       <div id="div1">
       </div>
     </main>
     <footer>
-      <input style="text-align: center;width: 250px;height: 40px; border-radius: 10px; margin-top: 7px;" type="text" id="question">
-      <input style="text-align: center;width: 60px;height: 35px; border-radius: 50px; background-color: transparent;" type="button" id="button1" value="전송">
-      <input style="text-align: center;width: 60px;height: 35px; border-radius: 50px; background-color: transparent;" type="button" onclick="delete_chat()" value="reset">
-
+      <input style="text-align: center;width: 250px;height: 40px; border-radius: 10px; margin-top: 7px" type="text" id="question">
+      <input style="text-align: center;width: 80px;height: 40px; border-radius: 50px; background-color: transparent;" type="button" id="button1" value="전송" >
+      <input style="text-align: center;width: 80px;height: 40px; border-radius: 50px; background-color: transparent;" type="button" onclick="delete_chat()" value="reset">
     </footer>
   </div>
   </body>
