@@ -1,3 +1,6 @@
+import pandas as pd
+import random
+
 class FindAnswer:
     def __init__(self, db):
         self.db = db
@@ -41,3 +44,42 @@ class FindAnswer:
         answer = answer.replace('{', '')
         answer = answer.replace('}', '')
         return answer
+
+    def anwersearch(self, item):
+        region = item[0]
+        attraction = item[1]
+        companion = item[3]
+        reg_key, att_key = None, None
+        if len(companion) != 0:
+            if '아이' in companion:
+                att_key = '아이와함께'
+        if len(region) != 0:
+            if '여행지' in region:
+                att_key = '여행지'
+            # for reg in region:
+            #     if (reg[-1] == ['도']) & (reg[-3:] in ['특별시', '광역시']):
+            #         reg_key = '시도명'
+            #     elif reg[-1] in ['시', '군', '구']:
+            #         reg_key = '시군구명'
+            #     else:
+            #         reg_key = '읍면동명'
+        if len(attraction) != 0:
+            if '맛집' in attraction:
+                att_key = '맛집'
+        else:
+            att_key = '여행지'
+
+        sql = f"select 어트랙션_목록 from total_attraction"
+        if reg_key != None:
+            sql += f" where {reg_key} like '{reg}%'"
+            if att_key != None:
+                sql += f" and 어트랙션 = '{att_key}'"
+        elif att_key != None:
+            sql += f" where 어트랙션 = '{att_key}'"
+        lst = ''
+        for select in self.db.select_all(sql):
+            lst += select[0]
+            if len(lst) != 0:
+                result = random.sample(set(lst.split(', ')), 5)
+                return (', ').join(result) + ' 등'
+        return None
