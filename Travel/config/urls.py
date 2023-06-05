@@ -24,4 +24,5 @@ urlpatterns = [
     path('query', views.query),
     path('delete_chat', views.delete_chat),
     path('result', views.recommend),
+    path('research1', views.research1),
 ]

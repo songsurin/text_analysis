@@ -39,18 +39,18 @@ def getMessage(query):
             f = FindAnswer(db)
             answer_text = f.search(intent_name, ner_tags)
             answer = f.tag_to_word(ner_predicts, answer_text)
-            tf = '0'
             if intent_name != '기타':
                 answer = answer + ' ' + A
-                tf = '1'
         except:
             answer = "죄송합니다. 질문 내용을 이해하지 못했습니다."
         json = {
+            "in": ans,
             "Query": query,
             "Answer": answer,
             "Intent": intent_name,
             "NER": str(ner_predicts),
-            "TF": tf
+            "Item": item,
+            "q": Q
         }
         return json
     except Exception as ex:

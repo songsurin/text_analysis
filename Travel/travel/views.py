@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from travel.mychatbot import getMessage
 from travel.models import Chat
+from chatbot.Preprocess import Preprocess
+from chatbot.IntentModel import IntentModel
+from chatbot.NerModel import NerModel
+from chatbot.FindAnswer import FindAnswer
 from django.http import JsonResponse
 import socket
 import json
@@ -29,7 +33,6 @@ def recommend(request):
 
 def query(request):
     question = request.GET["question"]
-    print(question)
     # message = json.dumps(json_data)
     # mySocket.send(message.encode())
     #
@@ -37,16 +40,12 @@ def query(request):
     # data = mySocket.recv(2048).decode()
     # ret_data = json.loads(data)
     msg = getMessage(question)
-    print(msg)
     query=msg['Query']
     answer=msg['Answer']
     intent=msg['Intent']
-    tf=msg['TF']
-
-    Chat(query=query,intent=intent,tf=tf).save()
-    Chat(answer=answer,intent=intent,tf=tf).save()
+    # Chat(query=query,intent=intent).save()
+    Chat(query=query, answer=answer,intent=intent).save()
     items=Chat.objects.order_by('idx')
-    print(items)
 
     return render(request, 'travel/result.html',{'items':items})
 
@@ -54,5 +53,19 @@ def delete_chat(request):
     Chat.objects.all().delete()
     return redirect('/result')
 
-def research(request):
-    return redirect('/result')
+
+def research1(request):
+
+    question = request.GET["question"]
+    print('research1:'+question)
+    msg = getMessage(question)
+    ans = msg["in"]
+    Q = msg['q']
+    I = msg['Item']
+    answer = ans.research(Q, I)
+    intent = msg['Intent']
+
+    Chat(answer=answer, query=question, intent=intent).save()
+    items = Chat.objects.order_by('idx')
+
+    return render(request, 'travel/result.html',{'items':items})

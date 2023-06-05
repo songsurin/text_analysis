@@ -2,27 +2,10 @@
 <html lang="en">
 <div>
 <head>
-<!--    .textbox {-->
-<!--            position: relative;-->
-<!--            display: inline-block;-->
-<!--            max-width: calc(100% - 70px);-->
-<!--            padding: 10px;-->
-<!--            margin-top: 7px;-->
-<!--            margin-left: 20px;-->
-<!--            border-radius: 10px;-->
-<!--            font-size: 13px;-->
-<!--            background-color: #ddd;-->
-<!--        }-->
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
 
-<!--    .textbox::before {-->
-<!--            position: absolute;-->
-<!--            display: block;-->
-<!--            content: "◀";-->
-<!--            top: 0;-->
-<!--            left: -15px;-->
-<!--            font-size: 1.5rem;-->
-<!--            color: #ddd;-->
-<!--        }-->
+</script>
 <table width="100%">
 {% for item in items %}
 <tr>
@@ -32,24 +15,41 @@
             padding: 10px;
             margin-top: 7px;
             margin-left: 200px;
+            margin-bottom: 7px;
             border-radius: 10px;
             font-size: 13px;
             background-color: yellow;" width="50%">{{item.query}}</td>
-    {% elif item.answer != '' %}
+
+    {% elif item.query == '' %}
+    <td style="display: inline-block;
+            max-width: 100%;
+            padding: 10px;
+            margin-top: 7px;
+            margin-left: 200px;
+            margin-bottom: 7px;
+            border-radius: 10px;
+            font-size: 13px;
+            background-color:#A9D0F5;" width="50%">{{item.query}}</td>
+    {% endif %}
+
+    {% if item.query != '' %}
     <td style="display: inline-block;
             max-width: 100%;
             padding: 10px;
             margin-top: 7px;
             margin-right: 200px;
+            margin-bottom: 7px;
             border-radius: 10px;
             font-size: 13px;
             background-color: white;" width="50%">{{item.answer}}
-        {% if item.tf == '1' %}
-            <input style="text-align: center;width: 60px;height: 35px; border-radius: 50px; background-color: transparent;" type="button" value="ADD">
+
+        {% if item.intent != '기타' %}
+            <input style="text-align: center;width: 60px;height: 35px; border-radius: 50px; background-color: transparent;" type="button" value="ADD"
+            onclick="research1('{{item.idx}}','{{item.query}}')" >
         {% endif %}
     </td>
-    {% else %}
-    <td width="50%" bgcolor="cornflowerblue">{{item.answer}}</td>
+    {% elif item.query == '' %}
+    <td></td>
     {% endif %}
 </tr>
 {% endfor %}
