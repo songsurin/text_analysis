@@ -1,14 +1,8 @@
 from django.shortcuts import render, redirect
 from travel.mychatbot import getMessage
 from travel.models import Chat
-from chatbot.Preprocess import Preprocess
-from chatbot.IntentModel import IntentModel
-from chatbot.NerModel import NerModel
-from chatbot.FindAnswer import FindAnswer
-from django.http import JsonResponse
 import socket
 import json
-import sys
 
 def get_answer(query):
     # 챗봇 엔진 서버 연결
@@ -57,7 +51,6 @@ def delete_chat(request):
 def research1(request):
 
     question = request.GET["question"]
-    print('research1:'+question)
     msg = getMessage(question)
     ans = msg["in"]
     Q = msg['q']

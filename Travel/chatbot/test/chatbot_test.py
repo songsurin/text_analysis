@@ -22,7 +22,7 @@ queries = ['부모님과 놀러갈만한 데 어디 없을까요',
            '속초에 관광지 추천해주세요.',
            '제주도 맛집 추천 좀 해주세요.',
            'ㅇㅇ',
-           '여행지']
+           '감사합니다']
 
 # 의도 파악 모델
 intent = IntentModel(model_name='../model/intent_model.h5',

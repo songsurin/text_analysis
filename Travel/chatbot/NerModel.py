@@ -10,7 +10,7 @@ class NerModel:
         # BIO 태그 클래스별 레이블
         self.index_to_ner = {1: 'O', 2: 'B_DT', 3: 'B_C', 4: 'B_R', 5: 'B_G', 6: 'B_A', 7: 'B_P', 8: 'B_T', 9: 'X', 10: 'I', 0: 'PAD'}
 
-        # 의도 분류 모델 불러오기
+        # 개체명 인식 모델 불러오기
         self.model = load_model(model_name)
 
         # 챗봇 Preprocess 객체

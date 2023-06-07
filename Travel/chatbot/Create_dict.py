@@ -27,7 +27,7 @@ text5 = list(recommend["question"]) + list(recommend["answer"])
 corpus_data = text1 + text2 + text3 + text4 + text5
 
 # 말뭉치 데이터에서 키워드만 추출해서 사전 리스트 생성
-p = Preprocess()
+p = Preprocess(userdic='../data/user_dic.tsv')
 dict = []
 for c in corpus_data:
     pos = p.pos(c)

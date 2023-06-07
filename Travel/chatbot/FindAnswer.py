@@ -1,4 +1,3 @@
-import pandas as pd
 import random
 
 class FindAnswer:
@@ -45,7 +44,7 @@ class FindAnswer:
         answer = answer.replace('}', '')
         return answer
 
-    def anwersearch(self, item):
+    def answersearch(self, item):
         region = item[0]
         attraction = item[1]
         companion = item[3]
@@ -56,13 +55,7 @@ class FindAnswer:
         if len(region) != 0:
             if '여행지' in region:
                 att_key = '여행지'
-            # for reg in region:
-            #     if (reg[-1] == ['도']) & (reg[-3:] in ['특별시', '광역시']):
-            #         reg_key = '시도명'
-            #     elif reg[-1] in ['시', '군', '구']:
-            #         reg_key = '시군구명'
-            #     else:
-            #         reg_key = '읍면동명'
+            reg_key = ['시도명', '시군구명', '읍면동명']
         if len(attraction) != 0:
             if '맛집' in attraction:
                 att_key = '맛집'
@@ -71,15 +64,18 @@ class FindAnswer:
 
         sql = f"select 어트랙션_목록 from total_attraction"
         if reg_key != None:
-            sql += f" where {reg_key} like '{reg}%'"
+            for reg in region:
+                sql += f" where (시도명 like '{reg}%' or 시군구명 like '{reg}%' or 읍면동명 like '{reg}%')"
             if att_key != None:
-                sql += f" and 어트랙션 = '{att_key}'"
-        elif att_key != None:
-            sql += f" where 어트랙션 = '{att_key}'"
-        lst = ''
-        for select in self.db.select_all(sql):
-            lst += select[0]
-            if len(lst) != 0:
-                result = random.sample(set(lst.split(', ')), 5)
-                return (', ').join(result) + ' 등'
+                sql += f" and 어트랙션='{att_key}'"
+        elif (reg_key == None) & (att_key != None):
+            sql += f" where 어트랙션='{att_key}'"
+        lst = []
+        ans = self.db.select_all(sql)
+        for select in ans:
+            lst.append(list(select.values())[0])
+        if len(lst) != 0:
+            sh = str(lst).replace("[", '').replace(']', '').replace("'", '').replace(" ", '').split(',')
+            result = random.sample(sh, 5)
+            return (', ').join(result) + ' 등'
         return None
