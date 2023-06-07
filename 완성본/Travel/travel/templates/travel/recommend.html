@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>챗봇서비스</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+    $(function(){
+        $("#button1").click(function(){
+            const q=$("#question").val();
+            load_chat(q);
+        });
+        /*
+        $("#re").click(function(){
+            const q=$("#question").val();
+            console.log('q:',q);
+            $('#question').val('');
+            $.ajax({
+                url: '/research1',
+                data: 'question='+q,
+                success: function(){
+                    console.log('success');
+                }
+            });
+        });
+        */
+    });
+    function load_chat(q){
+            console.log('q:',q);
+            $('#question').val('');
+            $.ajax({
+                url: '/query',
+                data: 'question='+q,
+                success:function(txt){
+                    //console.log(txt);
+                    $("#div1").html(txt);
+                    hideLoading();
+                }
+            });
+            // 로딩 표시
+            showLoading();
+    }
+
+    function research1(idx,question){
+        console.log('idx:'+idx);
+            const q=question;
+            console.log('q:',q);
+            //$('#question').val('');
+            $.ajax({
+                url: '/research1',
+                data: 'question='+q,
+                success: function(res){
+                    console.log('success');
+                    console.log(res);
+                    load_chat('');
+                }
+            });
+    }
+
+    function delete_chat(){
+        if(confirm('모든 내용을 삭제하시겠습니까?')){
+            location.href='delete_chat';
+        }
+    }
+    function showLoading(){
+        $("#roadingStatus").show();
+    }
+    function hideLoading(){
+        $("#roadingStatus").hide();
+    }
+
+    </script>
+    <style>
+        h1{
+        text-align: center;
+        }
+
+        body {
+          height: 780px;
+          width: 510px;
+          flex-direction: column;
+
+          text-align: center;
+          background-color: #999;
+          margin: auto;
+        }
+
+        main {
+          height: 710px;
+          width: 500px;
+          margin: auto;
+          background-color: #A9D0F5;
+          overflow-y: auto;
+          display:flex;
+          flex-direction: column-reverse;
+        }
+        main::-webkit-scrollbar {
+            width: 10px;
+          }
+        main::-webkit-scrollbar-thumb {
+            background-color: #2f3542;
+            border-radius: 10px;
+            background-clip: padding-box;
+            border: 2px solid transparent;
+          }
+        main::-webkit-scrollbar-track {
+            background-color: grey;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 5px white;
+          }
+        .back {
+          margin-top: 10px;
+          background-color: white;
+          height: 820px;
+          width: 520px;
+        }
+
+        #roadingStatus {
+            position: absolute;
+            top: 30%;
+            left: 49%;
+            z-index: 1;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+  <div class="spinner-border roadingStatus" id="roadingStatus" role="status" style="display: none;">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="back">
+    <header>
+      <h2>여행지 추천 챗봇 서비스입니다.</h2>
+    </header>
+    <main>
+      <div id="div1">
+      </div>
+    </main>
+    <footer>
+      <input style="text-align: center;width: 250px;height: 40px; border-radius: 10px; margin-top: 8px" type="text" id="question">
+      <input style="text-align: center;width: 80px;height: 40px; border-radius: 50px; background-color: transparent;" type="button" id="button1" value="전송" >
+      <input style="text-align: center;width: 80px;height: 40px; border-radius: 50px; background-color: transparent;" type="button" onclick="delete_chat()" value="reset">
+    </footer>
+  </div>
+</body>
+</html>

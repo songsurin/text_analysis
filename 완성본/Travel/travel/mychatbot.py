@@ -39,8 +39,7 @@ def getMessage(query):
             f = FindAnswer(db)
             answer_text = f.search(intent_name, ner_tags)
             answer = f.tag_to_word(ner_predicts, answer_text)
-            answer_search = f.anwersearch(item)
-            print(answer_search, item) # 수정되면 삭제
+            answer_search = f.answersearch(item)
             if intent_name != '기타':
                 if answer_search != None:
                     answer = answer + ' ' + answer_search
