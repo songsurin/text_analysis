@@ -25,12 +25,12 @@ class AnswerModel:
             elif predicts[i][1] in 'O':
                 if predicts[i][0] in ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월', '1박2일']:
                     datetime.append(predicts[i][0])
-        item = [region, attraction, datetime, companion, purpose]
-        return item
+        items = [region, attraction, datetime, companion, purpose]
+        return items
 
     # 검색 질문 생성
-    def create_query(self, item):
-        keywords = [i for i in item if len(i) != 0]
+    def create_query(self, items):
+        keywords = [i for i in items if len(i) != 0]
         keywords = list(product(*keywords))
         queries = []
         for keyword in keywords:
@@ -44,8 +44,47 @@ class AnswerModel:
             queries.append(query.strip())
         return queries
 
-    def research(self, queries, item):
-        region, attraction, datetime, companion, purpose = item
+    # 네이버 크롤링
+    def search(self, queries):
+        # 옵션 생성
+        options = webdriver.ChromeOptions()
+        # 창 숨기는 옵션 추가
+        options.add_argument("headless")
+
+        url = 'https://www.naver.com/'
+        driver = webdriver.Chrome(options=options)
+        for query in queries:
+            driver.get(url)
+            driver.find_element(By.CLASS_NAME, 'search_input').send_keys(query)
+            driver.find_element(By.CLASS_NAME, 'btn_search').click()
+            des_list = driver.find_elements(By.CLASS_NAME, 'keyword-UDtbe')
+            top5 = des_list[0:5]
+
+            if len(top5) == 0:
+                res_list = driver.find_elements(By.CLASS_NAME, 'place_bluelink')
+                top5 = res_list[0:5]
+                time.sleep(0.5)
+
+            try:
+                if '맛집' in query:
+                    loc = query.split(' ')[0]
+                    answer = f'{loc} 추천 맛집으로는 '
+                else:
+                    answer = '추천하는 여행지로는 '
+                for i in range(len(top5)):
+                    answer += top5[i].text
+                    if i == len(top5) - 1:
+                        answer += ' '
+                    else:
+                        answer += ', '
+                answer += '등이 있습니다.'
+            except:
+                answer = '아직 학습되지 않은 부분입니다. 죄송합니다.'
+        driver.close()
+        return answer
+
+    def research(self, queries, items):
+        region, attraction, datetime, companion, purpose = items
         datetimes = ['요즘', '봄', '여름', '가을', '겨울', '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월',
                      '12월']
         if (len(purpose) == 0) and (len(companion) == 0) and (len(datetime) == 0):
@@ -135,43 +174,3 @@ class AnswerModel:
                 answer = '아직 학습되지 않은 부분입니다. 죄송합니다.'
         driver.close()
         return answer
-
-    # 네이버 크롤링
-    def search(self, queries):
-        # 옵션 생성
-        options = webdriver.ChromeOptions()
-        # 창 숨기는 옵션 추가
-        options.add_argument("headless")
-
-        url = 'https://www.naver.com/'
-        driver = webdriver.Chrome(options=options)
-        for query in queries:
-            driver.get(url)
-            driver.find_element(By.CLASS_NAME, 'search_input').send_keys(query)
-            driver.find_element(By.CLASS_NAME, 'btn_search').click()
-            des_list = driver.find_elements(By.CLASS_NAME, 'keyword-UDtbe')
-            top5 = des_list[0:5]
-
-            if len(top5) == 0:
-                res_list = driver.find_elements(By.CLASS_NAME, 'place_bluelink')
-                top5 = res_list[0:5]
-                time.sleep(0.5)
-
-            try:
-                if '맛집' in query:
-                    loc = query.split(' ')[0]
-                    answer = f'{loc} 추천 맛집으로는 '
-                else:
-                    answer = '추천하는 여행지로는 '
-                for i in range(len(top5)):
-                    answer += top5[i].text
-                    if i == len(top5) - 1:
-                        answer += ' '
-                    else:
-                        answer += ', '
-                answer += '등이 있습니다.'
-            except:
-                answer = '아직 학습되지 않은 부분입니다. 죄송합니다.'
-        driver.close()
-        return answer
-
