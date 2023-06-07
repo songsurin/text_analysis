@@ -69,3 +69,4 @@ https://ebbnflow.tistory.com/246
 
 - *맞춤법 검사기 돌릴때 haspell파일과 코드를 같은 폴더에 넣어서 하세요.*
 - *C드라이브에 받아서 사용하세요. 만약 다른 경로로 받으신다면 Travle/travle/mychatbot.py 안에 사전과 모델의 절대경로를 수정해서 사용하세요.*
+- *사용된 모델과 데이터 링크: https://drive.google.com/drive/folders/1F8M1SzRHX6DfyY3j6fUac4DDs1O51H53*
