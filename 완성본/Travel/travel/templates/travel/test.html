@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script>
+        function clickedBtn(){
+            // 로딩 표시
+            showLoading();
+            // 로딩 숨기기(2초 후)
+            setTimeout("hideLoading()", 2000);
+        }
+        function showLoading(){
+            $("#roadingStatus").show();
+        }
+        function hideLoading(){
+            $("#roadingStatus").hide();
+        }
+    </script>
+    <style>
+        #roadingStatus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="spinner-border roadingStatus" id="roadingStatus" role="status" style="display: none;">
+    <span class="sr-only">Loading...</span>
+</div>
+<button type="button" onclick="clickedBtn">로딩버튼</button>
+</body>
+</html>

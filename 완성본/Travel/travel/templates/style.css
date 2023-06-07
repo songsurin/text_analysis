@@ -1,0 +1,29 @@
+html {
+        height: 700px;
+        width: 300px;
+        background-color: cornflowerblue;
+    }
+
+body {
+        display: flex;
+        flex-direction: column;
+
+        text-align: center;
+        background-color: #999;
+        margin: 0;
+      }
+
+main {
+        flex: 1;
+        background-color: cornflowerblue;
+      }
+
+#container {
+        display: grid;
+        justify-items:center;
+        align-items:flex-start;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        height: 100vh;
+        grid-row: 1 / span 2;
+        }
