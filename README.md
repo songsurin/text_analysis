@@ -36,14 +36,12 @@
 #### 4. 의도 분류 모델 생성
   - Travel/chatbot/Train_model.py
   - Travel/chatbot/IntentModel.py
-  - 모델구조\n
-    ![image](https://github.com/songsurin/text_analysis/assets/121409507/26434c0f-69e9-4410-bc9e-4cc76cb08772)
+  - ![image](https://github.com/songsurin/text_analysis/assets/121409507/26434c0f-69e9-4410-bc9e-4cc76cb08772)
 
 #### 5. 개체명 인식 모델 생성
   - Travel/chatbot/Train_ner_model.py
   - Travel/chatbot/NerModel.py
-  - 모델 구조\n
-    ![image](https://github.com/songsurin/text_analysis/assets/121409507/8e104b2a-d1d5-466c-b43c-1bb49cd0f220)
+  - ![image](https://github.com/songsurin/text_analysis/assets/121409507/8e104b2a-d1d5-466c-b43c-1bb49cd0f220)
 
 #### 6. 예상 질답 DB생성
   - Travel/chatbot/db/Database.py
