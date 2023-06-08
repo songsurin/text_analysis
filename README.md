@@ -5,10 +5,11 @@
 - 네이버 여행정보: 국내 여행지 정보
 
 ## 사용한 언어 및 라이브러리, 프레임워크
-- Python: konlpy, jpype, pickle, tensorflow, pandas, os, glob, re, json, time, selenium, numpy, seqeval, matplotlib, sklearn, pymysql, logging, random, threading, socket, MySQLdb, itertools, ast
+- Python(Visual Studio Code)
+  - konlpy, jpype, pickle, tensorflow, pandas, os, glob, re, json, time, selenium, numpy, seqeval, matplotlib, sklearn, pymysql, logging, random, threading, socket, MySQLdb, itertools, ast
 - HTML, JS
 - MySQL
-- Django
+- Django(PyCharm)
 
 ## 순서
 #### 1. 텍스트 전처리기 생성
@@ -35,10 +36,14 @@
 #### 4. 의도 분류 모델 생성
   - Travel/chatbot/Train_model.py
   - Travel/chatbot/IntentModel.py
+  - 모델구조\n
+    ![image](https://github.com/songsurin/text_analysis/assets/121409507/26434c0f-69e9-4410-bc9e-4cc76cb08772)
 
 #### 5. 개체명 인식 모델 생성
   - Travel/chatbot/Train_ner_model.py
   - Travel/chatbot/NerModel.py
+  - 모델 구조\n
+    ![image](https://github.com/songsurin/text_analysis/assets/121409507/8e104b2a-d1d5-466c-b43c-1bb49cd0f220)
 
 #### 6. 예상 질답 DB생성
   - Travel/chatbot/db/Database.py
