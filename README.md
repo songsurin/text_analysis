@@ -35,11 +35,14 @@
   <img src="https://img.shields.io/badge/Numpy-777BB4?style=flat-square&logo=numpy&logoColor=white"/>
   <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=flat-square&logo=scikit-learn&logoColor=white"/>
   <img src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat-square&logo=TensorFlow&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Matplotlib-F2F2F2?style=flat-square&logo=Matplotlib&logoColor=black"/>
   <img src="https://img.shields.io/badge/-selenium-%43B02A?style=flat-square&logo=selenium&logoColor=white"/>
 </div>
-<div align="left">  
-  konlpy, jpype, seqeval, pickle, socket, os, glob, re, json, pymysql, logging, threading, MySQLdb
+<div align="left">
+  <img src="https://img.shields.io/badge/KoNLPy-003366?style=flat-squar&logo=KoNLPy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JPype-9999ff?style=flat-squar&logo=JPype"/>
+  <img src="https://img.shields.io/badge/Socket-0066ff?style=flat-squar&logo=Socket"/>
+  <img src="https://img.shields.io/badge/Matplotlib-F2F2F2?style=flat-square&logo=Matplotlib&logoColor=black"/>
+  <img src="https://img.shields.io/badge/PyMySQL-ff00ff?style=flat-squar&logo=PyMySQL"/>
 </div>
 
 #### DBMS
