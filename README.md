@@ -1,15 +1,63 @@
-# 여행지 추천 Chatbot
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=%20국내%20여행지%20추천%20Chatbot&fontSize=50)
+
+### 수행기간 : 2023.05.18 ~ 2023.06.08
+
+## 주제
+코로나 종식 선언 이후, 국내 여행을 계획 중인 사람들을 위한 여행지 추천 챗봇 생성 프로젝트
+
+## 팀원
+<ul>
+  <li><a href="https://github.com/SpearXirus">김창균</a></li>
+  <li><a href="https://github.com/songsurin">송수린</a></li>
+  <li><a href="https://github.com/cesong2">송찬의</a></li>
+  <li><a href="https://github.com/HyunJW">현정환</a></li>
+</ul>
+
 ## 데이터 출처
-- AI Hub: 주제별 텍스트 일상 대화 데이터, 일반 상식, 용도별 목적대화 데이터, 여행 정보 데이터셋
-- 네이버 지식인: 여행지 추천 질문 & 답변
-- 네이버 여행정보: 국내 여행지 정보
+<ul>
+  <li><a href="https://www.aihub.or.kr/">AI Hub</a> : 주제별 텍스트 일상 대화 데이터, 일반 상식, 용도별 목적대화 데이터, 여행 정보 데이터셋</li>
+  <li>네이버 지식인 : 여행지 추천 질문 & 답변</li>
+  <li><a href="https://travel.naver.com/domestic">네이버 여행정보</a> : 국내 여행지 정보</li>
+</ul>
 
 ## 사용한 언어 및 라이브러리, 프레임워크
-- Python(Visual Studio Code)
-  - konlpy, jpype, pickle, tensorflow, pandas, os, glob, re, json, time, selenium, numpy, seqeval, matplotlib, sklearn, pymysql, logging, random, threading, socket, MySQLdb, itertools, ast
-- HTML, JS
-- MySQL
-- Django(PyCharm)
+#### 언어
+<div align="left">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/HTML-239120?&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS-239120?&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Javascript-F7DF1E?&logo=javascript&logoColor=black"/>
+</div>
+
+#### 라이브러리
+<div align="left">
+  <img src="https://img.shields.io/badge/Pandas-2C2D72?style=flat-square&logo=pandas&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Numpy-777BB4?style=flat-square&logo=numpy&logoColor=white"/>
+  <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=flat-square&logo=scikit-learn&logoColor=white"/>
+  <img src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat-square&logo=TensorFlow&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Matplotlib-F2F2F2?style=flat-square&logo=Matplotlib&logoColor=black"/>
+  <img src="https://img.shields.io/badge/-selenium-%43B02A?style=flat-square&logo=selenium&logoColor=white"/>
+</div>
+<div align="left">  
+  konlpy, jpype, seqeval, pickle, socket, os, glob, re, json, pymysql, logging, threading, MySQLdb
+</div>
+
+#### DBMS
+<div align="left">
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
+</div>
+  
+#### 프레임워크
+<div align="left">
+  <img src="https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Django-092E20?&logo=django&logoColor=white"/>
+</div>  
+
+#### 툴
+<div align="left">
+  <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white"/>
+  <img src="https://img.shields.io/badge/pycharm-143?style=flat-square&logo=pycharm&logoColor=black&color=black&labelColor=green"/>
+</div>
 
 ## 순서
 #### 1. 텍스트 전처리기 생성
@@ -36,12 +84,12 @@
 #### 4. 의도 분류 모델 생성
   - Travel/chatbot/Train_model.py
   - Travel/chatbot/IntentModel.py
-  - ![image](https://github.com/songsurin/text_analysis/assets/121409507/26434c0f-69e9-4410-bc9e-4cc76cb08772)
+  <br/><img src="https://github.com/songsurin/text_analysis/assets/121409507/26434c0f-69e9-4410-bc9e-4cc76cb08772" width=70%/>
 
 #### 5. 개체명 인식 모델 생성
   - Travel/chatbot/Train_ner_model.py
   - Travel/chatbot/NerModel.py
-  - ![image](https://github.com/songsurin/text_analysis/assets/121409507/8e104b2a-d1d5-466c-b43c-1bb49cd0f220)
+  <br/><img src="https://github.com/songsurin/text_analysis/assets/121409507/8e104b2a-d1d5-466c-b43c-1bb49cd0f220" width=70%/>
 
 #### 6. 예상 질답 DB생성
   - Travel/chatbot/db/Database.py
@@ -73,14 +121,8 @@
 - 예약 시스템 구축
 - 예상 질문 추가 및 세분화
 
----
-
-맞춤법 검사기
-https://github.com/ssut/py-hanspell
-
-참고용 글
-https://ebbnflow.tistory.com/246
-
-- *맞춤법 검사기 돌릴때 haspell파일과 코드를 같은 폴더에 넣어서 하세요.*
-- *C드라이브에 받아서 사용하세요. 만약 다른 경로로 받으신다면 Travle/travle/mychatbot.py 안에 사전과 모델의 절대경로를 수정해서 사용하세요.*
-- *사용된 모델과 데이터 링크: https://drive.google.com/drive/folders/1F8M1SzRHX6DfyY3j6fUac4DDs1O51H53*
+## 비고
+- <a href="https://github.com/ssut/py-hanspell">맞춤법 검사기</a> - *맞춤법 검사기 돌릴때 haspell파일과 코드를 같은 폴더에 넣어서 하세요.*
+- <a href="https://ebbnflow.tistory.com/246">참고용 글</a>
+- <a href="https://drive.google.com/drive/folders/1F8M1SzRHX6DfyY3j6fUac4DDs1O51H53">사용된 모델과 데이터 링크</a>
+- *C드라이브에 받아서 사용하세요. 만약 다른 경로로 받으신다면 Travle/travle/mychatbot.py 안에 사전과 모델의 절대경로를 수정해서 사용하세요. 하드코딩 죄송합니다...*
