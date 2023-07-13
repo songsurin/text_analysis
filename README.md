@@ -118,6 +118,12 @@
 
 #### 12. Chatbot에 연결
 
+## 결과
+| 화면 예시 |
+| --- |
+| <img src="https://github.com/songsurin/text_analysis/assets/121409579/ab446c8f-98db-48ef-9208-87efe8300748" width=70%/> | 
+| <img src="https://github.com/songsurin/text_analysis/assets/121409579/45170293-7d9a-45aa-9405-87293d90f784"/> |
+
 ## 개선사항
 - BIO태깅 보완
 - 답변DB 보완
